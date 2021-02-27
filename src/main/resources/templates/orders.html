@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <th><span th:text="#{label.order.id}" /></th>
+        <th><span th:text="#{label.order.title}" /></th>
+        <th><span th:text="#{label.order.price}" /></th>
+        <th><span th:text="#{label.order.user}" /></th>
+        </thead>
+        <tbody>
+        <tr th:each="order:${orders}">
+            <td th:text="${order.id}" />
+            <td th:text="${order.title}" />
+            <td th:text="${order.price}"/>
+            <td th:text="${order.portalUser.firstName}+' '+${order.portalUser.lastName}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
