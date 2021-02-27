@@ -18,4 +18,45 @@ public class Order {
     @JoinColumn(name = "ORD_PU_ID", referencedColumnName = "PU_ID")
     private PortalUser portalUser;
 
+    public Order() {
+    }
+
+    public Order(int id, double price, String title, PortalUser portalUser) {
+        this.id = id;
+        this.price = price;
+        this.title = title;
+        this.portalUser = portalUser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public PortalUser getPortalUser() {
+        return portalUser;
+    }
+
+    public void setPortalUser(PortalUser portalUser) {
+        this.portalUser = portalUser;
+    }
 }
