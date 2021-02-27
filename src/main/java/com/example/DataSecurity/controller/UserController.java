@@ -33,6 +33,9 @@ public class UserController {
                 PageRequest.of(currentPage-1, currentSize)
         );
 
+        model.addAttribute("userPage", portalUserPage);
+        model.addAttribute("size", currentSize);
+
         int totalPages = portalUserPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)

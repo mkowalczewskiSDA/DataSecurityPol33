@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <th><span th:text="#{label.user.id}" /></th>
+        <th><span th:text="#{label.user.login}" /></th>
+        <th><span th:text="#{label.user.firstName}" /></th>
+        <th><span th:text="#{label.user.lastName}" /></th>
+        <th><span th:text="#{label.user.email}" /></th>
+        <th><span th:text="#{label.user.roles}" /></th>
+        </thead>
+        <tbody>
+        <tr th:each="portalUser :${userPage.content}">
+            <td th:text="${portalUser.id}" />
+            <td th:text="${portalUser.login}" />
+            <td th:text="${portalUser.firstName}"/>
+            <td th:text="${portalUser.lastName}"/>
+            <td th:text="${portalUser.email}"/>
+            <td>
+                <span th:each="role, iterStat : ${portalUser.roles}"
+                      th:text="!${iterStat.last} ? ${role.name}+',':${role.name}">
+                </span>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${userPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber: ${pageNumbers}">
+        <a th:href="@{/users(page=${pageNumber},size=${size})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
