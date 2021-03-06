@@ -8,5 +8,6 @@ public interface UserService {
 
     Page<PortalUser> findAllPagainated(Pageable pageable);
     void save(PortalUser portalUser);
+    PortalUser findByLogin(String login);
 
 }

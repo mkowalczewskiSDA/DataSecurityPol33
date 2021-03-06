@@ -38,4 +38,11 @@ public class UserServiceImpl implements UserService {
         portalUser.setRoles(roles);
         userRepository.save(portalUser);
     }
+
+    @Override
+    public PortalUser findByLogin(String login) {
+        return findByLogin(login);
+    }
+
+
 }
