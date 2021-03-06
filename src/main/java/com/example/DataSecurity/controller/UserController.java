@@ -5,7 +5,11 @@ import com.example.DataSecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -68,6 +72,22 @@ public class UserController {
             new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
         return "redirect:/login?logout";
+    }
+
+    @GetMapping("/admin/page")
+    public String admin() {
+        return "admin";
+    }
+
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/user")
+    public String user(Authentication authentication) {
+        /*if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+            return "user";
+        } else {
+            return "home";
+        }*/
+        return "user";
     }
 
 }
