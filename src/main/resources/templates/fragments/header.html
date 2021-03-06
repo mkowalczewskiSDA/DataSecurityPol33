@@ -26,6 +26,18 @@
                     <li class="active"><a th:href="@{/users}">Users</a></li>
                     <li class="active"><a th:href="@{/order/list}">Orders</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active" sec:authorize="${!isAuthenticated()}">
+                        <a th:href="@{/login}">
+                            <span class="glyphicon glyphicon-log-in"> Log In</span>
+                        </a>
+                    </li>
+                    <li class="active" sec:authorize="${isAuthenticated()}">
+                        <a th:href="@{/logout}">
+                            <span class="glyphicon glyphicon-log-out"> Log Out</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
