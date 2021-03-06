@@ -44,5 +44,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLogin(login);
     }
 
+    @Override
+    public void update(PortalUser portalUser) {
+        userRepository.save(portalUser);
+    }
+
 
 }

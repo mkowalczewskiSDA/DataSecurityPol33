@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -115,6 +116,15 @@ public class UserController {
     public String details(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("portalUser",userService.findByLogin(user.getUsername()));
+        return "details";
+    }
+
+    @PostMapping("/details")
+    public String update(@ModelAttribute(value = "portalUser") PortalUser portalUser, Model model) {
+        PortalUser portalUserTemp = userService.findByLogin(portalUser.getLogin());
+        portalUserTemp.setEmail(portalUser.getEmail());
+        userService.update(portalUserTemp);
+        model.addAttribute("portalUser", portalUserTemp);
         return "details";
     }
 
