@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PortalUser findByLogin(String login) {
-        return findByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
 
