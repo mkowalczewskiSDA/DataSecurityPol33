@@ -14,12 +14,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -80,6 +82,7 @@ public class UserController {
     }
 
     //@PreAuthorize("hasAuthority('ADMIN')")
+    @Secured("ADMIN")
     @GetMapping("/user")
     public String user(Authentication authentication) {
         /*if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
@@ -88,6 +91,23 @@ public class UserController {
             return "home";
         }*/
         return "user";
+    }
+
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        model.addAttribute("portalUser", new PortalUser());
+        return "/register";
+    }
+
+    @PostMapping("/register")
+    public String register(@Valid PortalUser portalUser, BindingResult result){
+        if (result.hasErrors()){
+            return "register";
+        }
+        else {
+            userService.save(portalUser);
+            return "redirect:/login";
+        }
     }
 
 }

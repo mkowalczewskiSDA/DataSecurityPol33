@@ -7,5 +7,6 @@ import org.springframework.data.domain.Pageable;
 public interface UserService {
 
     Page<PortalUser> findAllPagainated(Pageable pageable);
+    void save(PortalUser portalUser);
 
 }
